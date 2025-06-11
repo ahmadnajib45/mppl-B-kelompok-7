@@ -15,7 +15,7 @@
     <a href="{{ route('siswa.create') }}">+ Tambah Siswa</a>
     <table class="w-full mt-4 bg-white rounded shadow" border="1" cellpadding="10" cellspacing="0">
         <tr>
-            <th>Nama</th>
+            <th>NIS</th>
             <th>NISN</th>
             <th>Kelas</th>
             <th>Nama Wali</th>

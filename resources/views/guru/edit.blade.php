@@ -55,7 +55,7 @@
             <select class="form-control" name="status_kepegawaian" id="status_kepegawaian" required>
                 <option value="">Pilih Status</option>
                 <option value="PNS">PNS</option>
-                <option value="Non-PNS">Non-PNS</option>
+                <option value="NON">Non-PNS</option>
             </select>
         </div>
 
@@ -70,8 +70,8 @@
             <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
             <select name="jenis_kelamin" class="form-control" required>
                 <option value="">-- Pilih --</option>
-                <option value="Laki-laki" {{ old('jenis_kelamin', $guru->jenis_kelamin) == 'L' ? 'selected' : '' }}>Laki-laki</option>
-                <option value="Perempuan" {{ old('jenis_kelamin', $guru->jenis_kelamin) == 'P' ? 'selected' : '' }}>Perempuan</option>
+                <option value="L" {{ old('jenis_kelamin', $guru->jenis_kelamin) == 'L' ? 'selected' : '' }}>Laki-laki</option>
+                <option value="P" {{ old('jenis_kelamin', $guru->jenis_kelamin) == 'P' ? 'selected' : '' }}>Perempuan</option>
             </select>
         </div>
 
