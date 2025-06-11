@@ -2,7 +2,11 @@
     <x-slot name="header">
         <h2 class="text-xl font-semibold">Daftar User</h2>
     </x-slot>
-
+@if (session('success'))
+    <div class="alert alert-success mb-4">
+        {{ session('success') }}
+    </div>
+@endif
     <div class="py-4 px-6">
         <a href="{{ route('user.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">Tambah User</a>
 

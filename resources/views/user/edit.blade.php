@@ -2,10 +2,20 @@
     <x-slot name="header">
         <h2 class="text-xl font-semibold">Edit User</h2>
     </x-slot>
-
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <strong>Oops!</strong> Ada masalah saat input:<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <div class="py-4 px-6">
         <form action="{{ route('user.update', $user->id) }}" method="POST" class="space-y-4">
-            @csrf @method('PUT')
+            @csrf 
+            @method('PUT')
 
             <div>
                 <label>Nama</label>

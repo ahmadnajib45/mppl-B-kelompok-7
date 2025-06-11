@@ -10,6 +10,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/admin-site', function () {
+    return view('admin.index');
+})->name('admin.index');
+
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -35,6 +40,7 @@ Route::delete('/user/{id}', [UserController::class, 'destroy'])->middleware(['au
 // GuruController (admin dan guru)
 Route::get('/guru', [GuruController::class, 'index'])->middleware(['auth', 'role:admin,guru'])->name('guru.index');
 Route::get('/guru/create', [GuruController::class, 'create'])->middleware(['auth', 'role:admin'])->name('guru.create');
+Route::get('/guru/{id}', [GuruController::class, 'show'])->middleware(['auth', 'role:admin,guru'])->name('guru.show');
 Route::post('/guru', [GuruController::class, 'store'])->middleware(['auth', 'role:admin'])->name('guru.store');
 Route::get('/guru/{id}/edit', [GuruController::class, 'edit'])->middleware(['auth', 'role:admin,guru'])->name('guru.edit');
 Route::put('/guru/{id}', [GuruController::class, 'update'])->middleware(['auth', 'role:admin,guru'])->name('guru.update');
@@ -43,6 +49,7 @@ Route::delete('/guru/{id}', [GuruController::class, 'destroy'])->middleware(['au
 // SiswaController (admin, guru, murid)
 Route::get('/siswa', [SiswaController::class, 'index'])->middleware(['auth', 'role:admin,guru,murid'])->name('siswa.index');
 Route::get('/siswa/create', [SiswaController::class, 'create'])->middleware(['auth', 'role:admin,guru'])->name('siswa.create');
+Route::get('/siswa/{id}', [SiswaController::class, 'show'])->middleware(['auth', 'role:admin,guru,murid'])->name('siswa.show');
 Route::post('/siswa', [SiswaController::class, 'store'])->middleware(['auth', 'role:admin,guru'])->name('siswa.store');
 Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->middleware(['auth', 'role:admin,guru'])->name('siswa.edit');
 Route::put('/siswa/{id}', [SiswaController::class, 'update'])->middleware(['auth', 'role:admin,guru'])->name('siswa.update');
