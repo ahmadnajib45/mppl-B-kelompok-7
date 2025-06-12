@@ -9,7 +9,7 @@
 </head>
 <body class="font-sans antialiased">
 
-    <nav x-data="{ open: false }" class="bg-[#44a474] opacity-2 text-white px-6 py-4">
+    <nav x-data="{ open: false }" class="fixed-top bg-[#44a474] opacity-2 text-white px-6 py-4">
     <div class="flex items-center justify-between">
         <!-- Logo dan Brand -->
         <div class="flex items-center space-x-3">

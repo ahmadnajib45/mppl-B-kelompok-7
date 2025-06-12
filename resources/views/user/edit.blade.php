@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold">Edit User</h2>
+        <h2 class="font-bold text-white font-semibold text-xl leading-tight">Edit User</h2>
     </x-slot>
     @if ($errors->any())
         <div class="alert alert-danger">

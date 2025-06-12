@@ -1,37 +1,61 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold">Detail Siswa</h2>
+        <h2 class="font-bold text-white text-xl leading-tight">Detail Siswa</h2>
     </x-slot>
 
-    <div class="py-4 px-6">
-        <div class="container">
-            <a href="{{ route('siswa.index') }}" class="btn btn-secondary mb-2">Kembali</a>
-            <a href="{{ route('siswa.export.pdf', $siswa->id) }}" class="btn btn-danger mb-2">Export PDF</a>
+    <div class="p-6 bg-[#3A3434]  min-h-screen">
+         {{-- Tombol Navigasi --}}
+            <div class="flex justify-between mb-4">
+                <a href="{{ route('siswa.index') }}" class="bg-gray-800 text-white px-4 py-1 rounded hover:bg-gray-600">← Kembali</a>
+                <a href="{{ route('siswa.export.pdf', $siswa->id) }}" class="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700">Export PDF</a>
+            </div>
+        <div class="bg-[#D9D9D9] p-6 rounded-xl shadow-md max-w-4xl mx-auto">
 
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="card">
-                        <div class="card-body">
+            {{-- Header Nama & NIS --}}
+            <div class="text-center mb-4">
+                <h1 class="text-2xl font-bold">{{ $siswa->nama_lengkap }}</h1>
+                <p class="text-red-800 font-semibold text-lg">NIS : {{ $siswa->nis }}</p>
+            </div>
 
-                            <ul class="list-group">
-                            <li class="list-group-item"> @if($siswa->foto)
-                            <div class="col-md-4">
-                                <img src="{{ asset('storage/' . $siswa->foto) }}" class="img-fluid rounded-start" alt="Foto Siswa" width="200" class="mb-3">
-                            </div>
-                            @endif</li>
-                            <li class="list-group-item"><strong>NIS:</strong> {{ $siswa->nis }}</li>
-                            <li class="list-group-item"><strong>NISN:</strong> {{ $siswa->nisn }}</li>
-                            <li class="list-group-item"><strong>Nama Lengkap:</strong> {{ $siswa->nama_lengkap }}</li>
-                            <li class="list-group-item"><strong>Kelas:</strong> {{ $siswa->kelas }}</li>
-                            <li class="list-group-item"><strong>Agama:</strong> {{ $siswa->agama }}</li>
-                            <li class="list-group-item"><strong>Jenis Kelamin:</strong> {{ $siswa->jenis_kelamin }}</li>
-                            <li class="list-group-item"><strong>Alamat:</strong> {{ $siswa->alamat }}</li>
-                            <li class="list-group-item"><strong>Nama Ayah:</strong> {{ $siswa->nama_ayah }}</li>
-                            <li class="list-group-item"><strong>Nama Ibu:</strong> {{ $siswa->nama_ibu }}</li>
-                            <li class="list-group-item"><strong>Telepon Ayah:</strong> {{ $siswa->telepon_ayah }}</li>
-                            <li class="list-group-item"><strong>Telepon Ibu:</strong> {{ $siswa->telepon_ibu }}</li>
-                            <li class="list-group-item"><strong>Alamat Orang Tua:</strong> {{ $siswa->alamat_ortu }}</li>
-                        </div>
+            {{-- Konten Grid --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {{-- Foto Siswa --}}
+                <div class="flex justify-center">
+                    @if($siswa->foto)
+                        <img src="{{ asset('storage/' . $siswa->foto) }}" class="rounded-xl shadow w-60 h-auto object-cover" alt="Foto Siswa">
+                    @else
+                        <div class="w-60 h-80 bg-gray-400 rounded-xl flex items-center justify-center text-white">Tidak Ada Foto</div>
+                    @endif
+                </div>
+
+                {{-- Data --}}
+                <div class="md:col-span-2 text-red-800 font-semibold space-y-2">
+                    <div class="flex justify-between">
+                        <span>NISN</span><span> {{ $siswa->nisn }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Kelas</span><span> {{ $siswa->kelas }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Agama</span><span> {{ $siswa->agama }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Jenis Kelamin</span><span> {{ $siswa->jenis_kelamin }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Alamat</span><span> {{ $siswa->alamat }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Nama Ayah</span><span> {{ $siswa->nama_ayah }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Nama Ibu</span><span> {{ $siswa->nama_ibu }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>No. HP Ayah</span><span> {{ $siswa->telepon_ibu }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>No. HP Ibu</span><span> {{ $siswa->telepon_ayah }}</span>
                     </div>
                 </div>
             </div>

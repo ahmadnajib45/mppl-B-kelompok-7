@@ -1,40 +1,64 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold">Daftar User</h2>
+        <h2 class="font-bold text-white text-xl leading-tight">Detail Siswa</h2>
     </x-slot>
 
-    <div class="py-4 px-6">
-        <div class="container">
-    <a href="{{ route('guru.index') }}" class="btn btn-secondary mb-3">Kembali</a>
-    <a href="{{ route('guru.export.pdf', $guru->id) }}" class="btn btn-danger mb-3">Export PDF</a>
-
-    <div class="card mb-3">
-    <div class="row g-0">
-    <div class="card">
-        <div class="card-body">
-
-            <ul class="list-group">
-                <li class="list-group-item">@if($guru->foto)
-         <div class="col-md-4">
-                <img src="{{ asset('storage/' . $guru->foto) }}" alt="Foto Guru" width="200" class="mb-3">
+    <div class="p-6 bg-[#3A3434]  min-h-screen">
+         {{-- Tombol Navigasi --}}
+            <div class="flex justify-between mb-4">
+                <a href="{{ route('guru.index') }}" class="bg-gray-800 text-white px-4 py-1 rounded hover:bg-gray-600">← Kembali</a>
+                <a href="{{ route('guru.export.pdf', $guru->id) }}" class="bg-red-600 text-white px-4 py-1 rounded hover:bg-red-700">Export PDF</a>
             </div>
-            @endif </li>
-                <li class="list-group-item"><strong>NIP:</strong> {{ $guru->nip ?? '-' }}</li>
-                <li class="list-group-item"><strong>NUPTK:</strong> {{ $guru->nuptk }}</li>
-                <li class="list-group-item"><strong>Nama Lengkap:</strong> {{ $guru->nama_lengkap }}</li>
-                <li class="list-group-item"><strong>Mata Pelajaran:</strong> {{ $guru->mapel }}</li>
-                <li class="list-group-item"><strong>Status Kepegawaian:</strong> {{ $guru->status_kepegawaian }}</li>
-                <li class="list-group-item"><strong>Jabatan:</strong> {{ $guru->jabatan }}</li>
-                <li class="list-group-item"><strong>Jenis Kelamin:</strong> {{ $guru->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}</li>
-                <li class="list-group-item"><strong>Agama:</strong> {{ $guru->agama }}</li>
-                <li class="list-group-item"><strong>Alamat:</strong> {{ $guru->alamat }}</li>
-                <li class="list-group-item"><strong>Email:</strong> {{ $guru->email }}</li>
-                <li class="list-group-item"><strong>No. Telepon:</strong> {{ $guru->telepon }}</li>
-            </ul>
+        <div class="bg-[#D9D9D9] p-6 rounded-xl shadow-md max-w-4xl mx-auto">
+
+            {{-- Header Nama & NUPTK --}}
+            <div class="text-center mb-4">
+                <h1 class="text-2xl font-bold">{{ $guru->nama_lengkap }}</h1>
+                <p class="text-red-800 font-semibold text-lg">NUPTK : {{ $guru->nuptk }}</p>
+            </div>
+
+            {{-- Konten Grid --}}
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {{-- Foto Guru --}}
+                <div class="flex justify-center">
+                    @if($siswa->foto)
+                        <img src="{{ asset('storage/' . $siswa->foto) }}" class="rounded-xl shadow w-60 h-auto object-cover" alt="Foto Siswa">
+                    @else
+                        <div class="w-60 h-80 bg-gray-400 rounded-xl flex items-center justify-center text-white">Tidak Ada Foto</div>
+                    @endif
+                </div>
+
+                {{-- Data --}}
+                <div class="md:col-span-2 text-red-800 font-semibold space-y-2">
+                    <div class="flex justify-between">
+                        <span>NIS</span><span> {{ $guru->nis }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Mapel</span><span> {{ $guru->mapel }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Status</span><span> {{ $guru->status_kepegawaian }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Jabatan</span><span> {{ $guru->jabatan }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Jenis Kelamin</span><span> {{ $guru->jenis_kelamin }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Agama</span><span> {{ $guru->agama }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Alamat</span><span> {{ $guru->alamat }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Email</span><span> {{ $guru->email }}</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>No. HP</span><span> {{ $guru->telepon }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-</div>
-</div>
-</div>
 </x-app-layout>

@@ -1,14 +1,17 @@
 <x-app-layout>
-
-    <div class="bg-[#2B2527] py-10 px-4 min-h-screen text-white">
+<x-slot name="header">
+    <div>
+        <h1 class="text-2xl font-bold text-white mt-2">Selamat Datang di Aplikasi Manajemen Data Sekolah</h1>
+    </div>
+    </x-slot>
+    <div class="bg-[#3A3434] py-10 px-4 min-h-screen text-white">
         <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
 
             {{-- Kolom Kiri --}}
             <div class="md:col-span-2 space-y-6">
-                <h1 class="text-2xl font-bold">Selamat Datang di Aplikasi Manajemen Data Sekolah</h1>
 
                 {{-- Statistik Guru --}}
-                <div class="bg-gray-200 text-black rounded-2xl p-6 shadow-inner">
+                <div class="bg-[#D9D9D9] text-black rounded-2xl p-6 shadow-inner">
                     <h2 class="text-xl font-bold mb-4">Statistik Guru</h2>
                     <ul class="list-disc list-inside space-y-1">
                         <li>Total Guru: {{ $jumlahGuru }}</li>
@@ -27,7 +30,7 @@
                 </div>
 
                 {{-- Statistik Siswa --}}
-                <div class="bg-gray-200 text-black rounded-2xl p-6 shadow-inner">
+                <div class="bg-[#D9D9D9] text-black rounded-2xl p-6 shadow-inner">
                     <h2 class="text-xl font-bold mb-4">Statistik Siswa</h2>
                     <ul class="list-disc list-inside space-y-1">
                         <li>Total Siswa: {{ $jumlahSiswa }}</li>
@@ -47,7 +50,7 @@
 
             {{-- Kolom Kanan --}}
             <div class="space-y-6">
-                <div class="bg-gray-200 text-black p-6 rounded-2xl">
+                <div class="bg-[#D9D9D9] text-black p-6 rounded-2xl">
                     <div>
                     @if (Auth::user()->role == 'admin' || Auth::user()->role == 'guru')
                         <a href="{{ route('guru.index') }}" class="btn btn-secondary btn-sm">Lihat Daftar Guru & Karyawan</a>
@@ -73,7 +76,7 @@
                         @endif
                 </div>
 
-                <div class="bg-gray-200 text-black p-6 rounded-2xl">
+                <div class="bg-[#D9D9D9] text-black p-6 rounded-2xl">
                     <h2 class="text-lg font-semibold mb-3">ToDoList</h2>
                     <ul class="list-disc list-inside space-y-1 text-sm">
                         <li>Perbarui data guru terbaru</li>
