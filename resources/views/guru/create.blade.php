@@ -1,11 +1,10 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold">Daftar User</h2>
+        <h2 class="text-xl font-semibold">Tambah Guru Baru</h2>
     </x-slot>
 
     <div class="py-4 px-6">
         <div class="container">
-    <h2>Tambah Data Guru</h2>
         @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Oops!</strong> Ada masalah saat input:<br><br>
@@ -16,6 +15,7 @@
             </ul>
         </div>
     @endif
+    <a href="{{ route('guru.index') }}" class="btn btn-secondary mb-2">Kembali</a>
     <form action="{{ route('guru.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 

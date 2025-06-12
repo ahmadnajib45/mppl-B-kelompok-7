@@ -15,10 +15,22 @@ class SiswaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $siswas = Siswa::all();
-        return view('siswa.index', compact('siswas'));
+    $query = Siswa::query();
+
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('nama_lengkap', 'like', "%{$search}%")
+              ->orWhere('nis', 'like', "%{$search}%")
+              ->orWhere('nisn', 'like', "%{$search}%")
+              ->orWhere('kelas', 'like', "%{$search}%")
+              ->orWhere('nama_ayah', 'like', "%{$search}%");
+    }
+
+    $siswas = $query->get();
+
+    return view('siswa.index', compact('siswas'));
     }
 
     /**
@@ -89,7 +101,7 @@ class SiswaController extends Controller
         'name' => $siswa->nama_lengkap,
         'email' => $email,
         'password' => Hash::make($password),
-        'role' => 'siswa',
+        'role' => 'murid',
     ]);
 
         return redirect()->route('siswa.index')
@@ -101,10 +113,22 @@ class SiswaController extends Controller
      */
     public function show($id)
     {
-        $siswa = Siswa::findOrFail($id);
-        
-        return view('siswa.show', compact('siswa'));
+    $user = auth()->user();
+
+    // Ambil angka di awal email
+    preg_match('/^\d+/', $user->email, $matches);
+    $username = $matches[0] ?? null;
+
+    $siswa = Siswa::findOrFail($id);
+
+    // Hanya admin/guru atau siswa yang sesuai nis yang boleh akses
+    if (!in_array($user->role, ['admin', 'guru']) && $username != $siswa->nis) {
+        abort(403, 'Akses ditolak.');
     }
+
+    return view('siswa.show', compact('siswa'));
+    }
+
     
     /**
      * Show the form for editing the specified resource.
@@ -161,9 +185,8 @@ class SiswaController extends Controller
         ->with('success', 'Data siswa berhasil diperbarui.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+    
+    
     public function destroy($id)
     {
         $siswa = Siswa::findOrFail($id);

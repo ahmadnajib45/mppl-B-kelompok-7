@@ -7,7 +7,7 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-green-50">
-    <nav x-data="{ open: false }" class="bg-[#4CAF50] text-white shadow border-b border-gray-100 dark:border-gray-700">
+    <nav x-data="{ open: false }" class="bg-[#44a474] text-white shadow border-b border-gray-100 dark:border-gray-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
@@ -15,7 +15,7 @@
                 <div class="flex items-center space-x-4">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-12 w-12 rounded-full bg-white p-1">
                     <h1 class="text-xl font-bold">
-                        Ksatria <span class="italic text-lime-200">Nusantara.</span>
+                        <a href="{{ route('welcome') }}">Ksatria <span class="italic text-lime-200">Nusantara.</span></a>
                     </h1>
                 </div>
             </div>
@@ -25,7 +25,7 @@
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="bg-[#4CAF50] inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
+                            <button class=" inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-700 dark:text-gray-400 bg-white dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none transition ease-in-out duration-150">
                                 <div><span class="text-lg font-semibold">Halo, {{ Auth::user()->name ?? 'Admin' }}</span></div>
                                 <div class="bg-[#65D084] p-1 rounded-full ml-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -62,8 +62,6 @@
             @endauth
         </div>
     </div>
-
-    {{-- Responsive menu bisa kamu kembangkan sesuai kebutuhan --}}
 </nav>
 
     @yield('content')

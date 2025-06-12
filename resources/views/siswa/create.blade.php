@@ -15,7 +15,7 @@
             </ul>
         </div>
     @endif
-
+    <a href="{{ route('siswa.index') }}" class="btn btn-secondary mb-2">Kembali</a>
     <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 

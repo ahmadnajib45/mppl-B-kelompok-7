@@ -21,7 +21,8 @@
                     </ul>
                     <div class="mt-6">
                         <canvas id="guruGenderChart" class="mb-4"></canvas>
-                        <canvas id="guruMapelChart"></canvas>
+                        <canvas id="guruMapelChart" class="mb-4"></canvas>
+                        <canvas id="guruStatusChart"></canvas>
                     </div>
                 </div>
 
@@ -47,11 +48,29 @@
             {{-- Kolom Kanan --}}
             <div class="space-y-6">
                 <div class="bg-gray-200 text-black p-6 rounded-2xl">
-                    <h2 class="text-lg font-semibold mb-3">Berikut adalah fitur yang tersedia sesuai akun anda</h2>
+                    <div>
                     @if (Auth::user()->role == 'admin' || Auth::user()->role == 'guru')
-                        <a href="{{ route('guru.index') }}" class="block mb-2 hover:underline">Lihat Daftar Guru & Karyawan</a>
+                        <a href="{{ route('guru.index') }}" class="btn btn-secondary btn-sm">Lihat Daftar Guru & Karyawan</a>
                     @endif
-                    <a href="{{ route('siswa.index') }}" class="block hover:underline">Lihat Daftar Siswa</a>
+                    
+                    <a href="{{ route('siswa.index') }}" class="btn btn-secondary btn-sm">Lihat Daftar Siswa</a>
+                    </div>
+                    <div>
+                    <h2 class="text-lg font-semibold mt-3 mb-3">Berikut adalah fitur yang tersedia sesuai akun anda</h2>
+                    </div>
+                    <ul class="list-disc list-inside space-y-1 text-sm">
+                        @if (Auth::user()->role == 'admin')
+                            <li>Kelola Data Guru</li>
+                            <li>Kelola Data Siswa</li>
+                        @elseif (Auth::user()->role == 'guru')
+                            <li>Lihat Daftar Guru</li>
+                            <li>Lihat Daftar Siswa</li>
+                            <li>Lihat Data Pribadi</li>
+                            <li>Edit Data Pribadi</li>
+                        @else
+                            <li>Lihat Daftar Siswa</li>
+                            <li>Lihat Data Pribadi</li>
+                        @endif
                 </div>
 
                 <div class="bg-gray-200 text-black p-6 rounded-2xl">
@@ -124,6 +143,31 @@
             }
         }
     });
+
+    // Guru - Status Chart
+    new Chart(document.getElementById('guruStatusChart'), {
+        type: 'bar',
+        data: {
+            labels: guruStatusData.map(g => g.status_kepegawaian === 'PNS' ? 'PNS' : 'Non-PNS'),
+            datasets: [{
+                label: 'Status Kepegawaian Guru',
+                data: guruStatusData.map(g => g.total),
+                backgroundColor: ['#10b981', '#22d3ee'],
+                borderRadius: 6
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Status Kepegawaian Guru'
+                },
+                legend: { display: false }
+            }
+        }
+    });
+
 
     // Siswa - Kelas Chart
     new Chart(document.getElementById('siswaKelasChart'), {

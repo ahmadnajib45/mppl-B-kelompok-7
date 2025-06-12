@@ -15,6 +15,7 @@
             </ul>
         </div>
     @endif
+    <a href="{{ route('guru.index') }}" class="btn btn-secondary mb-2">Kembali</a>
     <form action="{{ route('guru.update', $guru->id) }}" method="POST" enctype="multipart/form-data">
         @csrf 
         @method('PUT')

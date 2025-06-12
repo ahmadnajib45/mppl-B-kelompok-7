@@ -6,11 +6,14 @@ use App\Http\Controllers\GuruController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PDFController;
 
+Route::get('/siswa/{id}/export/pdf', [PDFController::class, 'siswaDetailPdf'])->name('siswa.export.pdf');
+Route::get('/guru/{id}/export/pdf', [PDFController::class, 'guruDetailPdf'])->name('guru.export.pdf');
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Route::get('/admin-site', function () {
     return view('admin.index');
@@ -58,8 +61,8 @@ Route::get('/siswa', [SiswaController::class, 'index'])->middleware(['auth', 'ro
 Route::get('/siswa/create', [SiswaController::class, 'create'])->middleware(['auth', 'role:admin,guru'])->name('siswa.create');
 Route::get('/siswa/{id}', [SiswaController::class, 'show'])->middleware(['auth', 'role:admin,guru,murid'])->name('siswa.show');
 Route::post('/siswa', [SiswaController::class, 'store'])->middleware(['auth', 'role:admin,guru'])->name('siswa.store');
-Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->middleware(['auth', 'role:admin,guru'])->name('siswa.edit');
-Route::put('/siswa/{id}', [SiswaController::class, 'update'])->middleware(['auth', 'role:admin,guru'])->name('siswa.update');
+Route::get('/siswa/{id}/edit', [SiswaController::class, 'edit'])->middleware(['auth', 'role:admin'])->name('siswa.edit');
+Route::put('/siswa/{id}', [SiswaController::class, 'update'])->middleware(['auth', 'role:admin'])->name('siswa.update');
 Route::delete('/siswa/{id}', [SiswaController::class, 'destroy'])->middleware(['auth', 'role:admin'])->name('siswa.destroy');
 
 

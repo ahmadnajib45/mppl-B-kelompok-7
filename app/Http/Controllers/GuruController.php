@@ -13,10 +13,23 @@ class GuruController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $gurus = Guru::all();
-        return view('guru.index', compact('gurus'));
+       $query = Guru::query();
+
+    if ($request->has('search')) {
+        $search = $request->input('search');
+        $query->where('nama_lengkap', 'like', "%{$search}%")
+              ->orWhere('nip', 'like', "%{$search}%")
+              ->orWhere('nuptk', 'like', "%{$search}%")
+              ->orWhere('mapel', 'like', "%{$search}%")
+              ->orWhere('status_kepegawaian', 'like', "%{$search}%")
+              ->orWhere('jabatan', 'like', "%{$search}%");
+    }
+
+    $gurus = $query->get();
+
+    return view('guru.index', compact('gurus'));
     }
 
     /**

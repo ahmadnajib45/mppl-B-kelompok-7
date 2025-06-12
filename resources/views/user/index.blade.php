@@ -8,6 +8,7 @@
     </div>
 @endif
     <div class="py-4 px-6">
+        <a href="{{ route('admin.index') }}" class="btn btn-secondary mb-4">Kembali</a>
         <a href="{{ route('user.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded">Tambah User</a>
 
         <table class="w-full mt-4 bg-white rounded shadow">

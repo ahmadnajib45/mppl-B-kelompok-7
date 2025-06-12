@@ -5,16 +5,20 @@
 
     <div class="py-4 px-6">
         <div class="container">
-    <h2>Detail Guru</h2>
     <a href="{{ route('guru.index') }}" class="btn btn-secondary mb-3">Kembali</a>
+    <a href="{{ route('guru.export.pdf', $guru->id) }}" class="btn btn-danger mb-3">Export PDF</a>
 
+    <div class="card mb-3">
+    <div class="row g-0">
     <div class="card">
         <div class="card-body">
-            @if($guru->foto)
-                <img src="{{ asset('storage/' . $guru->foto) }}" alt="Foto Guru" width="150" class="mb-3">
-            @endif
 
             <ul class="list-group">
+                <li class="list-group-item">@if($guru->foto)
+         <div class="col-md-4">
+                <img src="{{ asset('storage/' . $guru->foto) }}" alt="Foto Guru" width="200" class="mb-3">
+            </div>
+            @endif </li>
                 <li class="list-group-item"><strong>NIP:</strong> {{ $guru->nip ?? '-' }}</li>
                 <li class="list-group-item"><strong>NUPTK:</strong> {{ $guru->nuptk }}</li>
                 <li class="list-group-item"><strong>Nama Lengkap:</strong> {{ $guru->nama_lengkap }}</li>
@@ -30,5 +34,7 @@
         </div>
     </div>
 </div>
-    </div>
+</div>
+</div>
+</div>
 </x-app-layout>

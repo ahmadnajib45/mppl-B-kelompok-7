@@ -10,7 +10,7 @@
         <div class="flex items-center space-x-4">
             <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-16 h-16">
             <h1 class="text-2xl md:text-3xl font-bold text-green-700">
-                Admin Panel <span class="text-gray-700">Ksatria</span><span class="italic text-green-600">Nusantara</span>
+                Panel <span class="text-gray-700">Ksatria</span><span class="italic text-green-600">Nusantara</span>
             </h1>
         </div>
     </div>
