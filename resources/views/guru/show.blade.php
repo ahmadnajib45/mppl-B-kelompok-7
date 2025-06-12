@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-bold text-white text-xl leading-tight">Detail Siswa</h2>
+        <h2 class="font-bold text-white text-xl leading-tight">Detail Guru</h2>
     </x-slot>
 
     <div class="p-6 bg-[#3A3434]  min-h-screen">
@@ -21,8 +21,8 @@
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {{-- Foto Guru --}}
                 <div class="flex justify-center">
-                    @if($siswa->foto)
-                        <img src="{{ asset('storage/' . $siswa->foto) }}" class="rounded-xl shadow w-60 h-auto object-cover" alt="Foto Siswa">
+                    @if($guru->foto)
+                        <img src="{{ asset('storage/' . $guru->foto) }}" class="rounded-xl shadow w-60 h-auto object-cover" alt="Foto Siswa">
                     @else
                         <div class="w-60 h-80 bg-gray-400 rounded-xl flex items-center justify-center text-white">Tidak Ada Foto</div>
                     @endif
@@ -31,19 +31,19 @@
                 {{-- Data --}}
                 <div class="md:col-span-2 text-red-800 font-semibold space-y-2">
                     <div class="flex justify-between">
-                        <span>NIS</span><span> {{ $guru->nis }}</span>
+                        <span>NIP</span><span> {{ $guru->nip }}</span>
                     </div>
                     <div class="flex justify-between">
                         <span>Mapel</span><span> {{ $guru->mapel }}</span>
                     </div>
                     <div class="flex justify-between">
-                        <span>Status</span><span> {{ $guru->status_kepegawaian }}</span>
+                        <span>Status</span><span> {{ $guru->status_kepegawaian == 'PNS' ? 'PNS' : 'Non-PNS'  }}</span>
                     </div>
                     <div class="flex justify-between">
                         <span>Jabatan</span><span> {{ $guru->jabatan }}</span>
                     </div>
                     <div class="flex justify-between">
-                        <span>Jenis Kelamin</span><span> {{ $guru->jenis_kelamin }}</span>
+                        <span>Jenis Kelamin</span><span> {{ $guru->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan'  }}</span>
                     </div>
                     <div class="flex justify-between">
                         <span>Agama</span><span> {{ $guru->agama }}</span>

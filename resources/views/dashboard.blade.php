@@ -19,7 +19,7 @@
                             <li>{{ $data->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan' }}: {{ $data->total }}</li>
                         @endforeach
                         @foreach ($guruPerStatus as $data)
-                            <li>{{ $data->status_kepegawaian }}: {{ $data->total }}</li>
+                            <li>{{ $data->status_kepegawaian == 'PNS' ? 'PNS' : 'Non-PNS'}}: {{ $data->total }}</li>
                         @endforeach
                     </ul>
                     <div class="mt-6">

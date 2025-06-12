@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class GuruController extends Controller
 {
@@ -35,6 +38,47 @@ class GuruController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function exportExcel()
+    {
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    // Set header kolom
+    $sheet->fromArray([
+        ['NIP', 'NUPTK', 'Nama Lengkap', 'Mapel', 'Status Kepegawaian', 'Jabatan', 'Jenis Kelamin', 'Agama', 'Alamat', 'Email', 'Telepon']
+    ]);
+
+    // Isi data
+    $rows = Guru::all()->map(function ($guru) {
+        return [
+            $guru->nip,
+            $guru->nuptk,
+            $guru->nama_lengkap,
+            $guru->mapel,
+            $guru->status_kepegawaian === 'PNS' ? 'PNS' : 'Non PNS',
+            $guru->jabatan,
+            $guru->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan',
+            $guru->agama,
+            $guru->jenis_kelamin,
+            $guru->alamat,
+            $guru->email,
+            $guru->telepon,
+        ];
+    })->toArray();
+
+    $sheet->fromArray($rows, null, 'A2');
+
+    // Simpan ke file sementara
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'data-guru.xlsx';
+    $tempFile = tempnam(sys_get_temp_dir(), $filename);
+    $writer->save($tempFile);
+
+    return response()->download($tempFile, $filename)->deleteFileAfterSend(true);
+    }
+
+
     public function create()
     {
         return view('guru.create');

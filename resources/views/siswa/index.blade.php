@@ -20,8 +20,12 @@
     <div class="p-4 bg-[#3A3434] min-h-screen">
         <div class="bg-[#D9D9D9] rounded-xl p-4 relative">
             <div class="absolute top-4 left-4 ">
-                <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm mb-4">Kembali</a>
-
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm mb-4">← Kembali</a>
+                @auth
+                @if (Auth::user()->role == 'admin' or Auth::user()->role == 'guru')
+                <a href="{{ route('siswa.export.excel') }}" class="btn btn-success btn-sm mb-4">📤 Export Excel</a>
+                @endif
+                @endauth
             </div>
             {{-- Search --}}
             <div class="absolute top-4 right-4">

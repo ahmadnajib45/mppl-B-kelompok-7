@@ -8,7 +8,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
-
+use Symfony\Component\HttpFoundation\StreamedResponse;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class SiswaController extends Controller
 {
@@ -36,6 +38,46 @@ class SiswaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    public function exportExcel()
+    {
+    $spreadsheet = new Spreadsheet();
+    $sheet = $spreadsheet->getActiveSheet();
+
+    // Set header kolom
+    $sheet->fromArray([
+        ['NIS', 'NISN', 'Nama Lengkap', 'Kelas', 'Agama', 'Jenis Kelamin', 'Alamat', 'Nama Ayah', 'Nama Ibu', 'Telepon Ayah', 'Telepon Ibu', 'Alamat Orang Tua']
+    ]);
+
+    // Isi data
+    $rows = Siswa::all()->map(function ($siswa) {
+        return [
+            $siswa->nis,
+            $siswa->nisn,
+            $siswa->nama_lengkap,
+            $siswa->kelas,
+            $siswa->agama,
+            $siswa->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan',
+            $siswa->alamat,
+            $siswa->nama_ayah,
+            $siswa->nama_ibu,
+            $siswa->telepon_ayah,
+            $siswa->telepon_ibu,
+            $siswa->alamat_ortu,
+        ];
+    })->toArray();
+
+    $sheet->fromArray($rows, null, 'A2');
+
+    // Simpan ke file sementara
+    $writer = new Xlsx($spreadsheet);
+    $filename = 'data-siswa.xlsx';
+    $tempFile = tempnam(sys_get_temp_dir(), $filename);
+    $writer->save($tempFile);
+
+    return response()->download($tempFile, $filename)->deleteFileAfterSend(true);
+    }
+
     public function create()
     {
         return view('siswa.create');

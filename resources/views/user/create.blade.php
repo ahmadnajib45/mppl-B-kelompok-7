@@ -15,7 +15,7 @@
         </div>
     @endif
     <a href="{{ route('user.index') }}" class="btn btn-secondary mt-2">Kembali</a>
-    <div class="py-12">
+    <div class=" bg-[#D9D9D9] py-12">
         <div class="max-w-xl mx-auto">
             <form action="{{ route('user.store') }}" method="POST" class="space-y-4">
                 @csrf

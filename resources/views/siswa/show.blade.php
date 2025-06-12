@@ -40,7 +40,7 @@
                         <span>Agama</span><span> {{ $siswa->agama }}</span>
                     </div>
                     <div class="flex justify-between">
-                        <span>Jenis Kelamin</span><span> {{ $siswa->jenis_kelamin }}</span>
+                        <span>Jenis Kelamin</span><span> {{ $siswa->jenis_kelamin == 'L' ? 'Laki-laki' : 'Perempuan'}}</span>
                     </div>
                     <div class="flex justify-between">
                         <span>Alamat</span><span> {{ $siswa->alamat }}</span>

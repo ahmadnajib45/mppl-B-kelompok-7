@@ -20,8 +20,12 @@
     <div class="p-4 bg-[#3A3434] min-h-screen">
         <div class="bg-[#D9D9D9] rounded-xl p-4 relative">
             <div class="absolute top-4 left-4 ">
-                <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm mb-4">Kembali</a>
-
+                <a href="{{ route('dashboard') }}" class="btn btn-secondary btn-sm mb-4">← Kembali</a>
+                @auth
+                @if (Auth::user()->role == 'admin')
+                <a href="{{ route('guru.export.excel') }}" class="btn btn-success btn-sm mb-4">📤 Export Excel</a>
+                @endif
+                @endauth
             </div>
             {{-- Search --}}
             <div class="absolute top-4 right-4">
@@ -53,7 +57,7 @@
                             <td class="py-1">{{ $guru->nama_lengkap }}</td>
                             <td class="py-1">{{ $guru->mapel }}</td>
                             <td class="py-1">{{ $guru->jabatan }}</td>
-                            <td class="py-1">{{ $guru->status_kepegawaian }}</td>
+                            <td class="py-1">{{ $guru->status_kepegawaian == 'PNS' ? 'PNS' : 'Non-PNS'}}</td>
                             <td class="py-1 text-right space-x-2">
 
                             @Auth

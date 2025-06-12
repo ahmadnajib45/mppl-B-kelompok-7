@@ -13,7 +13,7 @@
         </div>
     @endif
     <a href="{{ route('user.index') }}" class="btn btn-secondary mt-2">Kembali</a>
-    <div class="py-4 px-6">
+    <div class="bg-[#D9D9D9] py-4 px-6">
         <form action="{{ route('user.update', $user->id) }}" method="POST" class="space-y-4">
             @csrf 
             @method('PUT')

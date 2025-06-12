@@ -3,7 +3,7 @@
         <h2 class="font-bold text-white font-semibold text-xl leading-tight">Tambah Guru Baru</h2>
     </x-slot>
 
-    <div class="py-4 px-6">
+    <div class="bg-[#D9D9D9] py-4 px-6">
         <div class="container">
         @if ($errors->any())
         <div class="alert alert-danger">

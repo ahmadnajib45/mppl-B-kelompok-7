@@ -8,6 +8,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PDFController;
 
+Route::get('/siswa/export/excel', [SiswaController::class, 'exportExcel'])->name('siswa.export.excel');
+Route::get('/guru/export/excel', [GuruController::class, 'exportExcel'])->name('guru.export.excel');
+
+
 Route::get('/siswa/{id}/export/pdf', [PDFController::class, 'siswaDetailPdf'])->name('siswa.export.pdf');
 Route::get('/guru/{id}/export/pdf', [PDFController::class, 'guruDetailPdf'])->name('guru.export.pdf');
 
