@@ -14,7 +14,7 @@ Login admin (username/password default, validasi sederhana)
 CRUD Data Siswa: Tambah, edit, hapus, dan tampilkan data siswa (NIS, nama, kelas, tanggal lahir, alamat, dll)
 
 ⚙️ Teknologi:
-HTML, CSS, Bootstrap untuk UI
+HTML, CSS, Laravel, Tailwind dan Bootstrap untuk UI
 
 MySQL untuk database
 
